@@ -1,6 +1,234 @@
 body {
     margin: 0;
     padding: 0;
+    background: #1a1a1a;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
 
-    background: #292929;
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.question-card {
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.question-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.question-card input[type="radio"],
+.question-card input[type="checkbox"] {
+    display: none;
+}
+
+.option {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option:hover {
+    background: #3a3a3a;
+}
+
+.question-card:has(input[type="radio"]:checked) .option.correct::after {
+    content: " ✓";
+    color: #4ade80;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.question-card:has(input[type="radio"]:checked) input:checked + .option.correct {
+    background: #1e4d2b;
+    border-color: #2d7a3e;
+}
+
+.question-card:has(input[type="radio"]:checked) input:checked + .option:not(.correct) {
+    background: #4d1e1e;
+    border-color: #7a2d2d;
+}
+
+.question-card:has(input[type="radio"]:checked) input:checked + .option:not(.correct)::after {
+    content: " ✗";
+    color: #f87171;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.question-card:has(input[type="checkbox"]:checked) input:checked + .option.correct {
+    background: #1e4d2b;
+    border-color: #2d7a3e;
+}
+
+.question-card:has(input[type="checkbox"]:checked) input:checked + .option.correct::after {
+    content: " ✓";
+    color: #4ade80;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.question-card:has(input[type="checkbox"]:checked) input:checked + .option:not(.correct) {
+    background: #4d1e1e;
+    border-color: #7a2d2d;
+}
+
+.question-card:has(input[type="checkbox"]:checked) input:checked + .option:not(.correct)::after {
+    content: " ✗";
+    color: #f87171;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.results {
+    display: none;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+.results h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+body:has(#q1a:checked, #q1b:checked, #q1c:checked, #q1d:checked) .results,
+body:has(#q2a:checked, #q2b:checked, #q2c:checked, #q2d:checked) .results,
+body:has(#q3a:checked, #q3b:checked, #q3c:checked, #q3d:checked) .results {
+    display: block;
+}
+
+.score-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 8px;
+}
+
+.q1-result::after {
+    content: "—";
+}
+
+body:has(#q1c:checked) .q1-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+body:has(#q1a:checked) .q1-result::after,
+body:has(#q1b:checked) .q1-result::after,
+body:has(#q1d:checked) .q1-result::after {
+    content: "✗";
+    color: #f87171;
+    font-weight: bold;
+}
+
+.q2-result::after {
+    content: "—";
+}
+
+body:has(#q2b:checked) .q2-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+body:has(#q2a:checked) .q2-result::after,
+body:has(#q2c:checked) .q2-result::after,
+body:has(#q2d:checked) .q2-result::after {
+    content: "✗";
+    color: #f87171;
+    font-weight: bold;
+}
+
+.q3-result::after {
+    content: "—";
+}
+
+body:has(#q3b:checked) .q3-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+body:has(#q3a:checked) .q3-result::after,
+body:has(#q3c:checked) .q3-result::after,
+body:has(#q3d:checked) .q3-result::after {
+    content: "✗";
+    color: #f87171;
+    font-weight: bold;
+}
+
+.q4-result::after {
+    content: "—";
+}
+
+body:has(#q4a:checked):has(#q4c:checked):not(:has(#q4b:checked)):not(:has(#q4d:checked)) .q4-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+body:has(#q4a:checked) .q4-result::after,
+body:has(#q4b:checked) .q4-result::after,
+body:has(#q4c:checked) .q4-result::after,
+body:has(#q4d:checked) .q4-result::after {
+    content: "✗";
+    color: #f87171;
+    font-weight: bold;
+}
+
+body:has(#q4a:checked):has(#q4c:checked):not(:has(#q4b:checked)):not(:has(#q4d:checked)) .q4-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.q5-result::after {
+    content: "—";
+}
+
+body:has(#q5a:checked):has(#q5b:checked):has(#q5d:checked):not(:has(#q5c:checked)) .q5-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
+}
+
+body:has(#q5a:checked) .q5-result::after,
+body:has(#q5b:checked) .q5-result::after,
+body:has(#q5c:checked) .q5-result::after,
+body:has(#q5d:checked) .q5-result::after {
+    content: "✗";
+    color: #f87171;
+    font-weight: bold;
+}
+
+body:has(#q5a:checked):has(#q5b:checked):has(#q5d:checked):not(:has(#q5c:checked)) .q5-result::after {
+    content: "✓";
+    color: #4ade80;
+    font-weight: bold;
 }
